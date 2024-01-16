@@ -4,7 +4,6 @@ const pauseButton = document.getElementById("pause");
 const nextButton = document.getElementById("next");
 const previousButton = document.getElementById("previous");
 const shuffleButton = document.getElementById("shuffle");
-
 const allSongs = [
     {
         id: 0,
@@ -77,3 +76,13 @@ const allSongs = [
         src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/chasing-that-feeling.mp3",
     },
 ];
+// creates a new HML5 audio element
+const audio = new Audio();
+
+// spread (...) the contents of the allSongs array to the userData object to allow users to delete and shuffle songs from their playlists without disturbing the allSongs array.
+let userData = {
+    songs: [...allSongs],
+    currentSong: null,
+    songCurrentTime: 0
+};
+
