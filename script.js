@@ -108,6 +108,15 @@ const playSong = (id) => {
     audio.play();
 };
 
+const pauseSong = () => {
+    //stores the current time of the song when it is paused
+    userData.songCurrentTime = audio.currentTime;
+    playButton.classList.remove("playing");
+    //pause() is a method of the Web Audio API for pausing music files.
+    audio.pause();
+
+};
+
 //function to display the songs in the UI
 const renderSongs = (array) => {
     //loop through array and build HTML for all the songs using the map() method to iterate through an array and return a new array.
