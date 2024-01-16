@@ -133,6 +133,15 @@ const renderSongs = (array) => {
 
     playlistSongs.innerHTML = songsHTML;
 };
-playButton.addEventListener('click', () => {});
+//adds playButton functionality
+playButton.addEventListener('click', () => {
+    if (userData?.currentSong === null) {
+        //this will ensure the first song in the playlist is played first.
+        playSong(userData?.songs[0].id);
+    } else {
+        //This ensures that the currently playing song will continue to play when the play button is clicked.
+        playSong(userData?.currentSong.id);
+    }
+});
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be null or undefined.
 renderSongs(userData?.songs);
