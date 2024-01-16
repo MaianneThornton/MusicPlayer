@@ -139,9 +139,14 @@ const renderSongs = (array) => {
         })
         .join("");
     //update the playlist in your HTML document to display the songs.
-
     playlistSongs.innerHTML = songsHTML;
 };
+
+//gets the index for the current song, you can use the indexOf() method
+const getCurrentSongIndex = () => {
+    return userData?.songs.indexOf(userData.currentSong);
+};
+
 //adds playButton functionality
 playButton.addEventListener('click', () => {
     if (userData?.currentSong === null) {
@@ -152,5 +157,8 @@ playButton.addEventListener('click', () => {
         playSong(userData?.currentSong.id);
     }
 });
+//adds pauseButton functionality
+pauseButton.addEventListener('click', pauseSong);
+
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be null or undefined.
 renderSongs(userData?.songs);
