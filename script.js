@@ -119,6 +119,7 @@ const pauseSong = () => {
 
 //determines the next song to play in the queue
 const playNextSong = () => {
+    //checks to see if there is a song currently playing
     if (userData?.currentSong === null) {
         playSong(userData?.songs[0].id);
     } else {
@@ -126,7 +127,18 @@ const playNextSong = () => {
         const nextSong = userData?.songs[currentSongIndex + 1];
         playSong(nextSong.id);
     }
- };
+};
+
+const playPreviousSong = () => {
+    //checks to see if there is a song currently playing
+    if (userData?.currentSong === null) {
+        return
+    } else {
+        const currentSongIndex = getCurrentSongIndex();
+        const previousSong = userData?.songs[currentSongIndex - 1];
+        playSong(previousSong.id);
+    }
+};
 
 //function to display the songs in the UI
 const renderSongs = (array) => {
@@ -172,6 +184,8 @@ playButton.addEventListener('click', () => {
 pauseButton.addEventListener('click', pauseSong);
 //adds nextButton functionality
 nextButton.addEventListener('click', playNextSong);
+//adds previousButton functionality
+previousButton.addEventListener('click', playPreviousSong);
 
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be null or undefined.
 renderSongs(userData?.songs);
