@@ -117,6 +117,17 @@ const pauseSong = () => {
 
 };
 
+//determines the next song to play in the queue
+const playNextSong = () => {
+    if (userData?.currentSong === null) {
+        playSong(userData?.songs[0].id);
+    } else {
+        const currentSongIndex = getCurrentSongIndex(); 
+        const nextSong = userData?.songs[currentSongIndex + 1];
+        playSong(nextSong.id);
+    }
+ };
+
 //function to display the songs in the UI
 const renderSongs = (array) => {
     //loop through array and build HTML for all the songs using the map() method to iterate through an array and return a new array.
@@ -159,6 +170,8 @@ playButton.addEventListener('click', () => {
 });
 //adds pauseButton functionality
 pauseButton.addEventListener('click', pauseSong);
+//adds nextButton functionality
+nextButton.addEventListener('click', playNextSong);
 
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be null or undefined.
 renderSongs(userData?.songs);
