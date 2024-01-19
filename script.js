@@ -104,6 +104,7 @@ const playSong = (id) => {
     //update the current song being played.
     userData.currentSong = song;
     playButton.classList.add("playing");
+    highlightCurrentSong();
     //play() is a method from the web audio API for playing an mp3 file.
     audio.play();
 };
@@ -117,7 +118,7 @@ const pauseSong = () => {
 
 };
 
-//determines the next song to play in the queue
+//function to skip to the next song
 const playNextSong = () => {
     //checks to see if there is a song currently playing
     if (userData?.currentSong === null) {
@@ -129,6 +130,7 @@ const playNextSong = () => {
     }
 };
 
+//function to play previous song
 const playPreviousSong = () => {
     //checks to see if there is a song currently playing
     if (userData?.currentSong === null) {
@@ -137,6 +139,20 @@ const playPreviousSong = () => {
         const currentSongIndex = getCurrentSongIndex();
         const previousSong = userData?.songs[currentSongIndex - 1];
         playSong(previousSong.id);
+    }
+};
+
+//function to highlight song currently playing
+const highlightCurrentSong = () => { 
+    const playlistSongElements = document.querySelectorAll(".playlist-song");
+    const songToHighlight = document.getElementById(`song-${userData?.currentSong?.id}`);
+    //forEach method is used to loop through the songEl array and perform a function on each element of the array. 
+    playlistSongElements.forEach((songEl) => {
+        songEl.removeAttribute("aria-current");
+    });
+    if (songToHighlight) {
+        //adds attribute to song currently playing
+        songToHighlight.setAttribute("aria-current", "true")
     }
 };
 
